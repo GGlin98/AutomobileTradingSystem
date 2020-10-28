@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+.text_center {
+	text-align: center;
+}
+
+.text_center p {
+	margin: 0;
+}
+
+.price {
+	color: red;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	/* font-size: 1.2rem; */
+	font-weight: bold;
+}
+
+.description {
+	font-family: Tahoma, Arial, Helvetica, sans-serif
+}
+
+.model {
+	color: #304198;
+	font-weight: bold;
+}
+
+.text_bold {
+	font-weight: bold;
+}
+
+.text_black {
+	color: black;
+}
+
+.odd-row {
+	background-color: #F6FDFF;
+}
+
+.car_header {
+	background-color: #3399CC;
+}
+
+.car_header p {
+	color: white;
+}
+
+.car_header a {
+	text-decoration: none;
+}
+
+.car_header a:hover {
+	color: yellow;
+}
+
+.text_link {
+	color: white;
+}
+
+.table-wrapper-scroll-y {
+	position: relative;
+	height: 80vh;
+	overflow: auto;
+	display: block;
+}
+
+.order_status {
+	font-size: 1rem;
+}
+
+#ats_title {
+	font-family: monospace;
+}
