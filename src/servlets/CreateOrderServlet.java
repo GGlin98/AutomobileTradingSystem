@@ -82,8 +82,8 @@ public class CreateOrderServlet extends HttpServlet {
 		else
 			ct = db.saveUserInfo("", "", "", "", "", "", "");
 		
-		request.getRequestDispatcher("ordersList.jsp").forward(request, response);
-		// TODO: implement dealer page
+//		request.getRequestDispatcher("ordersList.jsp").forward(request, response);
+		response.sendRedirect("ordersList.jsp");
 	}
 
 }

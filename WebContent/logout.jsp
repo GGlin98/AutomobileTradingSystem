@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +7,10 @@
 <title>index</title>
 </head>
 <body>
-	<% session.invalidate();
+	<%
+		session.invalidate();
 	request.setAttribute("disp_logout_done", "y");
+	response.sendRedirect(response.encodeURL(request.getContextPath() + "/login.jsp"));
 	%>
-	<jsp:forward page="login.jsp"></jsp:forward> 
 </body>
 </html>

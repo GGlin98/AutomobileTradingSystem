@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("disp_signup_success_modal", "y");
 			else
 				session.setAttribute("disp_signup_fail_modal", "y");
-			response.sendRedirect(referer);
+			response.sendRedirect("login.jsp");
 		} else if (log_in != null) {
 			ArrayList result = db.getSaltPwd(uid);
 			if (result.size() == 2) {
@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				// User ID not existed
 				session.setAttribute("disp_login_modal", "y");
-				response.sendRedirect(referer);
+				response.sendRedirect("login.jsp");
 				return;
 			}
 			if (save_pwd.equals(salted_pwd)) {
@@ -76,21 +76,21 @@ public class LoginServlet extends HttpServlet {
 				Map<String, String> userInfo = db.getUserInfo(uid);
 				if (((String) userInfo.get("user_type")).equals("dealer")) {
 					// User is a dealer
-					request.getRequestDispatcher("dealer_menu.jsp").forward(request, response);
+					response.sendRedirect("dealer_menu.jsp");
 				} else {
 					// User is a customer
 					String order_state = (String) session.getAttribute("order_state");
 					if (order_state != null && order_state.equals("y")) {
-						request.getRequestDispatcher("placeOrder.jsp").forward(request, response);
+						response.sendRedirect("placeOrder.jsp");
 						session.setAttribute("order_state", "n");
 					} else {
-						request.getRequestDispatcher("shopping.jsp").forward(request, response);
+						response.sendRedirect("shopping.jsp");
 					}
 				}
 			} else {
 				// Wrong Password
 				session.setAttribute("disp_login_modal", "y");
-				response.sendRedirect(referer);
+				response.sendRedirect("login.jsp");
 			}
 		}
 	}

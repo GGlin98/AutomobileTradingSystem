@@ -16,36 +16,40 @@ import database.DBAO;
 @WebServlet("/ConfirmOrderServlet")
 public class ConfirmOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ConfirmOrderServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ConfirmOrderServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		DBAO db;
 		int ct;
 		HttpSession session = request.getSession();
-		
+
 		String uid = request.getParameter("uid");
 		String order_time = request.getParameter("order_time");
 		String confirmed = request.getParameter("confirmed");
 		db = (DBAO) session.getAttribute("db");
-		
+
 		if (db == null) {
 			try {
 				db = new DBAO();
@@ -53,7 +57,7 @@ public class ConfirmOrderServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (confirmed.equals("y"))
 			ct = db.confirmOrder(uid, order_time);
 		else
