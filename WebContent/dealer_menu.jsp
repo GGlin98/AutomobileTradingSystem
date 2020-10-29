@@ -46,7 +46,7 @@
 		db = new DBAO();
 		session.setAttribute("db", db);
 	}
-	ArrayList orders = db.getCustomersOrders(uid);
+	ArrayList<Map<String, String>> orders = db.getCustomersOrders(uid);
 	int size = orders.size();
 	%>
 	<div class="container">
@@ -70,8 +70,8 @@
 			<ul class="list-group mb-3">
 				<%
 					for (int i = 0; i < size; i++) {
-					Map order = (HashMap) orders.get(i);
-					HashMap car = (HashMap) db.getCarDetail((String) order.get("car_id"));
+					Map<String, String> order = (HashMap<String, String>) orders.get(i);
+					HashMap<String, ?> car = (HashMap<String, ?>) db.getCarDetail((String) order.get("car_id"));
 					String status = (String) order.get("order_status");
 				%>
 				<li

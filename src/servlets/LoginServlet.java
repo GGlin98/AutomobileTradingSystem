@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * Servlet implementation class LoginServlet
  */
-//@WebServlet("/LoginServlet")
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 		String sign_in = (String) request.getParameter("sign_in");
 		String uid = (String) request.getParameter("uid");
 		String pwd = (String) request.getParameter("pwd");
-		String referer = request.getHeader("referer");
+//		String referrer = request.getHeader("referrer");
 		String save_pwd;
 		String salted_pwd;
 
@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("disp_signup_fail_modal", "y");
 			response.sendRedirect("login.jsp");
 		} else if (log_in != null) {
-			ArrayList result = db.getSaltPwd(uid);
+			ArrayList<?> result = db.getSaltPwd(uid);
 			if (result.size() == 2) {
 				byte[] salt = (byte[]) result.get(0);
 				save_pwd = (String) result.get(1);

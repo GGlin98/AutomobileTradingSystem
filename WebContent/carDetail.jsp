@@ -31,7 +31,7 @@
 	<%
 		String id = request.getParameter("id");
 	DBAO db = (DBAO) session.getAttribute("db");
-	HashMap car = (HashMap) db.getCarDetail(id);
+	HashMap<String, ?> car = (HashMap<String, ?>) db.getCarDetail(id);
 	session.setAttribute("car", car.clone());
 	car.remove("ID");
 	car.remove("Image URL");

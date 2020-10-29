@@ -71,7 +71,7 @@
 		}
 	%>
 	<%!DBAO db;
-	ArrayList cars;%>
+	ArrayList<Map<String, ?>> cars;%>
 	<%
 		String page_num = request.getParameter("page"), sort_model = request.getParameter("sort_model"),
 			sort_price = request.getParameter("sort_price"), sort_year = request.getParameter("sort_year"),
@@ -139,7 +139,7 @@
 			session.setAttribute("hp_order", "DESC");
 	} else {
 		// 		cars = null;
-		cars = (ArrayList) session.getAttribute("cars");
+		cars = (ArrayList<Map<String, ?>>) session.getAttribute("cars");
 	}
 	if (null == page_num) {
 		page_num = "1";
@@ -194,7 +194,7 @@
 				</p>
 			</div>
 		</div>
-		<%!HashMap car;%>
+		<%!HashMap<String, ?> car;%>
 		<%
 			db = new DBAO();
 		if (cars == null)
@@ -211,7 +211,7 @@
 			end = start + 9;
 		}
 		for (int i = start; i <= end; i++) {
-			car = (HashMap) cars.get(i);
+			car = (HashMap<String, ?>) cars.get(i);
 		%>
 		<%
 			if (i % 2 == 0) {
@@ -302,7 +302,7 @@
 							%>
 							<%
 								for (int i = page_start; i <= page_end; i++) {
-								car = (HashMap) cars.get(i);
+								car = (HashMap<String, ?>) cars.get(i);
 							%>
 							<%
 								if (i == page_cur) {
@@ -340,5 +340,6 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>

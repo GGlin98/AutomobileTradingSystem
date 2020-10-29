@@ -24,7 +24,6 @@ public class CreateOrderServlet extends HttpServlet {
 	 */
 	public CreateOrderServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -33,7 +32,6 @@ public class CreateOrderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -74,13 +72,14 @@ public class CreateOrderServlet extends HttpServlet {
 			}
 		}
 
+		@SuppressWarnings("unused")
 		int ct = db.createOrder(uid, car_id, ts, Dealer, firstName, lastName, email, tel, address, country, zip);
 		
 		if (saveInfo.equals("on"))
 			// Save User Info
-			ct = db.saveUserInfo(firstName, lastName, email, tel, address, country, zip);
+			ct = db.saveUserInfo(uid, firstName, lastName, email, tel, address, country, zip);
 		else
-			ct = db.saveUserInfo("", "", "", "", "", "", "");
+			ct = db.saveUserInfo(uid, "", "", "", "", "", "", "");
 		
 //		request.getRequestDispatcher("ordersList.jsp").forward(request, response);
 		response.sendRedirect("ordersList.jsp");

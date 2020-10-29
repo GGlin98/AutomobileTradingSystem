@@ -1,12 +1,12 @@
 package database;
 
 import java.sql.*;
-import javax.sql.*;
-import javax.naming.*;
+//import javax.sql.*;
+//import javax.naming.*;
 import java.util.*;
 
 public class DBAO {
-	private ArrayList cars;
+	private ArrayList<Map<String, ?>> cars;
 	Connection con;
 	private boolean conFree = true;
 
@@ -60,9 +60,9 @@ public class DBAO {
 		notify();
 	}
 
-	public ArrayList getCars() {
-		cars = new ArrayList();
-		Map car = new HashMap();
+	public ArrayList<Map<String, ?>> getCars() {
+		cars = new ArrayList<Map<String, ?>>();
+		Map<String, Object> car = new HashMap<String, Object>();
 
 		try {
 			String selectStatement = "select * from cars";
@@ -78,7 +78,7 @@ public class DBAO {
 					car.put(name, rs.getString(i));
 				}
 				cars.add(car);
-				car = new HashMap();
+				car = new HashMap<String, Object>();
 			}
 			prepStmt.close();
 		} catch (SQLException ex) {
@@ -92,9 +92,9 @@ public class DBAO {
 		return cars;
 	}
 
-	public ArrayList getCars(String col, String order) {
-		cars = new ArrayList();
-		Map car = new HashMap();
+	public ArrayList<Map<String, ?>> getCars(String col, String order) {
+		cars = new ArrayList<Map<String, ?>>();
+		Map<String, Object> car = new HashMap<String, Object>();
 		String order_by = "order by " + '`' + col + '`' + " " + order;
 
 		try {
@@ -111,7 +111,7 @@ public class DBAO {
 					car.put(name, rs.getString(i));
 				}
 				cars.add(car);
-				car = new HashMap();
+				car = new HashMap<String, Object>();
 			}
 			prepStmt.close();
 		} catch (SQLException ex) {
@@ -124,8 +124,8 @@ public class DBAO {
 		return cars;
 	}
 
-	public Map getCarDetail(String id) {
-		Map car = new HashMap();
+	public Map<String, ?> getCarDetail(String id) {
+		Map<String, Object> car = new HashMap<String, Object>();
 
 		try {
 			String selectStatement = "select * from cars where ID = " + '"' + id + '"';
@@ -171,11 +171,12 @@ public class DBAO {
 		return ct;
 	}
 
-	public int saveUserInfo(String firstName, String lastName, String email, String tel, String address, String country,
-			String zip) {
+	public int saveUserInfo(String uid, String firstName, String lastName, String email, String tel, String address,
+			String country, String zip) {
 		int ct = 0;
 		try {
-			String updateStatement = "update users set first_name = ?, last_name = ?, email = ?, tel = ?, address = ?, country = ?, zip = ?";
+			String updateStatement = "update users set first_name = ?, last_name = ?, email = ?, tel = ?, address = ?, country = ?, zip = ? where uid = '"
+					+ uid + "'";
 			getConnection();
 
 			PreparedStatement prepStmt = con.prepareStatement(updateStatement);
@@ -222,15 +223,15 @@ public class DBAO {
 		return result;
 	}
 
-	public ArrayList getSaltPwd(String uid) {
-		ArrayList result = new ArrayList();
+	public ArrayList<?> getSaltPwd(String uid) {
+		ArrayList<Object> result = new ArrayList<Object>();
 		try {
 			String selectStatement = "select salt, pwd from users where uid = '" + uid + "'";
 			getConnection();
 
 			PreparedStatement prepStmt = con.prepareStatement(selectStatement);
 			ResultSet rs = prepStmt.executeQuery();
-			ResultSetMetaData rsmd = rs.getMetaData();
+//			ResultSetMetaData rsmd = rs.getMetaData();
 			if (rs.next() == false)
 				return result;
 
@@ -281,9 +282,9 @@ public class DBAO {
 		return ct;
 	}
 
-	public ArrayList getUserOrders(String uid) {
-		ArrayList orders = new ArrayList();
-		Map order = new HashMap();
+	public ArrayList<Map<String, String>> getUserOrders(String uid) {
+		ArrayList<Map<String, String>> orders = new ArrayList<Map<String, String>>();
+		Map<String, String> order = new HashMap<String, String>();
 
 		try {
 			String selectStatement = "select * from orders where uid = '" + uid + "' order by order_time desc";
@@ -299,7 +300,7 @@ public class DBAO {
 					order.put(name, rs.getString(i));
 				}
 				orders.add(order);
-				order = new HashMap();
+				order = new HashMap<String, String>();
 			}
 			prepStmt.close();
 		} catch (SQLException ex) {
@@ -311,9 +312,9 @@ public class DBAO {
 		return orders;
 	}
 
-	public ArrayList getCustomersOrders(String dealer) {
-		ArrayList orders = new ArrayList();
-		Map order = new HashMap();
+	public ArrayList<Map<String, String>> getCustomersOrders(String dealer) {
+		ArrayList<Map<String, String>> orders = new ArrayList<Map<String, String>>();
+		Map<String, String> order = new HashMap<String, String>();
 
 		try {
 			String selectStatement = "select * from orders where Dealer = '" + dealer + "' order by order_time desc";
@@ -329,7 +330,7 @@ public class DBAO {
 					order.put(name, rs.getString(i));
 				}
 				orders.add(order);
-				order = new HashMap();
+				order = new HashMap<String, String>();
 			}
 			prepStmt.close();
 		} catch (SQLException ex) {
