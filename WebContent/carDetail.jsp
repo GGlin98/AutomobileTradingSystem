@@ -37,7 +37,12 @@
 	car.remove("Image URL");
 	%>
 	<div class="container">
-		<div class="row mt-4">
+		<div class="row my-2 justify-content-center">
+			<div class="col-auto">
+				<h4>Car specification</h4>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-auto table-wrapper-scroll-y">
 				<table class="table table-striped table-bordered">
 					<tbody>

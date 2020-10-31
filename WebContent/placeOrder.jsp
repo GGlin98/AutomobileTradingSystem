@@ -120,7 +120,13 @@
 								class="custom-select d-block w-100" id="country" name="country"
 								required>
 								<option value="">Choose...</option>
+								<%
+									if (!((String) userInfo.get("country")).equals("")) {
+								%>
 								<option selected><%=userInfo.get("country")%></option>
+								<%
+									}
+								%>
 								<option>Singapore</option>
 								<option>Australia</option>
 								<option>Brazil</option>
